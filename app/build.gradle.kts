@@ -50,7 +50,14 @@ android {
 }
 
 dependencies {
-
+    implementation ("io.coil-kt:coil-compose:1.4.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("androidx.compose.material:material:1.0.0")
+    val nav_version = "2.7.7"
+    implementation("androidx.navigation:navigation-compose:$nav_version")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
