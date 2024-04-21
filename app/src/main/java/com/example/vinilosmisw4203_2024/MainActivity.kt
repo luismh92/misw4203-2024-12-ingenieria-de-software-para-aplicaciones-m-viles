@@ -45,6 +45,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
                 NavHost(navController = navController, startDestination = "welcome") {
                     composable("welcome") { WelcomeScreen(navController) }
                     composable("User") { UserScreen() }
+                    composable("Collectionist") { CollectionistScreen() }
                 }
             }
         }
@@ -83,6 +84,20 @@ fun WelcomeScreen(navController: NavController) {
                 modifier = Modifier.padding(8.dp),
                 color = Color.Black
                 )
+            }
+        Button(
+            onClick = {
+                navController.navigate("collectionist")
+            },
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFBDBDBD)),
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                text = "Login as Collectionist",
+                fontSize = 18.sp,
+                modifier = Modifier.padding(8.dp),
+                color = Color.Black
+                 )
             }
         }
     }
