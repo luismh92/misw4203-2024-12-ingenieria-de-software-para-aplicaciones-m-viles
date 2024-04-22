@@ -2,6 +2,8 @@
 
 ## Iteracion 1
 
+Los demas artefactos e items de la iteracion 1 se encuentran en la wiki
+
 ### APK listo para instalar
 link: 
 
