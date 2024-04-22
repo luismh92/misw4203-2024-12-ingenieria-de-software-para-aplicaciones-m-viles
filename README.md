@@ -5,7 +5,7 @@
 Los demas artefactos e items de la iteracion 1 se encuentran en la wiki
 
 ### APK listo para instalar
-link: 
+link: https://uniandes-my.sharepoint.com/:f:/g/personal/l_mendozah_uniandes_edu_co/EsZNolbkuS9BmRdO2GxmVTQBFM_HriHyKucjihJ2bK_FQg?e=wbPh5g
 
 ### Demo APK Video
 
