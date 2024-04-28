@@ -1,4 +1,4 @@
-package com.example.vinilosmisw4203_2024
+package com.example.vinilosmisw4203_2024.views
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
@@ -24,8 +24,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import com.example.vinilosmisw4203_2024.R
-import com.example.vinilosmisw4203_2024.views.AlbumListScreen
-import com.example.vinilosmisw4203_2024.views.ArtistListScreen
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
