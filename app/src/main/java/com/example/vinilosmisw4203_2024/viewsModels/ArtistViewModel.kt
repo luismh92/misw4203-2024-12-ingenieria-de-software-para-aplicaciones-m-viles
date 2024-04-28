@@ -10,18 +10,27 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.example.vinilosmisw4203_2024.models.Artist
 
 
 @Composable
 fun ArtistList(items: List<Artist>) {
-    LazyColumn {
-        items(items) { artist ->
-            ArtistItem(artist)
+    Column {
+        Text(text = "12 VINILOS",
+            modifier = Modifier.padding(8.dp).align(Alignment.CenterHorizontally),
+            fontWeight = FontWeight.Bold, fontSize = 30.sp)
+        LazyColumn {
+            items(items) { artist ->
+                ArtistItem(artist)
+            }
+
         }
     }
 }
