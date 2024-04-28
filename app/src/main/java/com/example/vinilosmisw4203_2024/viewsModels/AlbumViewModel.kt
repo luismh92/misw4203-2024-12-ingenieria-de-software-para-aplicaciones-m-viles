@@ -6,9 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vinilosmisw4203_2024.models.Album
-import com.example.vinilosmisw4203_2024.models.Artist
 import com.example.vinilosmisw4203_2024.repositories.AlbumRepository
-import com.example.vinilosmisw4203_2024.repositories.ArtistRepository
 import kotlinx.coroutines.launch
 
 class AlbumViewModel : ViewModel() {

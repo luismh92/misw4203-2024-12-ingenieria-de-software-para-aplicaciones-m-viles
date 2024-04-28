@@ -28,6 +28,7 @@ import com.example.vinilosmisw4203_2024.R
 import com.example.vinilosmisw4203_2024.viewsModels.AlbumViewModel
 import com.example.vinilosmisw4203_2024.viewsModels.ArtistViewModel
 
+
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun UserScreen() {
