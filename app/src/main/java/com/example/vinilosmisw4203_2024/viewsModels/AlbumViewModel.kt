@@ -8,58 +8,31 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.example.vinilosmisw4203_2024.models.Album
-import com.example.vinilosmisw4203_2024.services.AlbumService
-import com.example.vinilosmisw4203_2024.services.RetrofitInstance
-import kotlinx.coroutines.launch
 
 @Composable
-fun AlbumListScreen(apiService: AlbumService = RetrofitInstance.api) {
-    val albums = remember { mutableStateOf<List<Album>?>(null) }
-    val loading = remember { mutableStateOf(true) }
-    val error = remember { mutableStateOf("") }
-    val coroutineScope = rememberCoroutineScope()
-
-    LaunchedEffect(Unit) {
-        coroutineScope.launch {
-            try {
-                albums.value = apiService.getAlbums()
-                loading.value = false
-            } catch (e: Exception) {
-                error.value = e.localizedMessage ?: "An unknown error occurred"
-                loading.value = false
+fun AlbumList(albums: List<Album>) {
+    Column {
+        Text(text = "12 VINILOS",
+            modifier = Modifier.padding(8.dp).align(Alignment.CenterHorizontally),
+            fontWeight = FontWeight.Bold, fontSize = 30.sp)
+        LazyColumn {
+            items(albums) { album ->
+                AlbumItem(album)
             }
         }
     }
 
-    if (loading.value) {
-        CircularProgressIndicator()
-    } else if (error.value.isNotEmpty()) {
-        Text("Error: ${error.value}")
-    } else {
-        albums.value?.let { AlbumList(it) }
-    }
-}
-
-@Composable
-fun AlbumList(albums: List<Album>) {
-    LazyColumn {
-        items(albums) { album ->
-            AlbumItem(album)
-        }
-    }
 }
 
 @Composable
