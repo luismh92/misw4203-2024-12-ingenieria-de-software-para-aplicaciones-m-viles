@@ -23,7 +23,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.vinilosmisw4203_2024.R
+import com.example.vinilosmisw4203_2024.viewsModels.AlbumViewModel
+import com.example.vinilosmisw4203_2024.viewsModels.ArtistViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -88,9 +91,15 @@ fun BottomNavigationBar(navController: NavHostController) {
 @Composable
 fun NavigationGraph(navController: NavHostController) {
     NavHost(navController, startDestination = "artists") {
-        composable("artists") { ArtistListScreen() }
+
+
+        composable("artists") {
+            val viewModelArtist = viewModel<ArtistViewModel>()
+            ArtistListScreen(viewModelArtist) }
         composable("collectors") { ScreenContent("COLECCIONISTAS") }
-        composable("albums") { AlbumListScreen() }
+        composable("albums") {
+            val viewModel = viewModel<AlbumViewModel>()
+            AlbumListScreen(viewModel) }
     }
 }
 
