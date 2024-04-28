@@ -1,4 +1,4 @@
-package com.example.vinilosmisw4203_2024.views
+package com.example.vinilosmisw4203_2024.viewsModels
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
