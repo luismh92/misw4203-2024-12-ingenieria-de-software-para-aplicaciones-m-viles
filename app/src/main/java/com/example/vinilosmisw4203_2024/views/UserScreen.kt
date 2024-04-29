@@ -1,4 +1,4 @@
-package com.example.vinilosmisw4203_2024
+package com.example.vinilosmisw4203_2024.views
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
@@ -23,8 +23,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.vinilosmisw4203_2024.R
-import com.example.vinilosmisw4203_2024.views.AlbumListScreen
+import com.example.vinilosmisw4203_2024.viewsModels.AlbumViewModel
+import com.example.vinilosmisw4203_2024.viewsModels.ArtistViewModel
+
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -89,16 +92,23 @@ fun BottomNavigationBar(navController: NavHostController) {
 @Composable
 fun NavigationGraph(navController: NavHostController) {
     NavHost(navController, startDestination = "artists") {
-        composable("artists") { ScreenContent("ARTISTAS") }
+
+        composable("artists") {
+            val viewModelArtist = viewModel<ArtistViewModel>()
+            ArtistListScreen(viewModelArtist) }
         composable("collectors") { ScreenContent("COLECCIONISTAS") }
-        composable("albums") { AlbumListScreen() }
+        composable("albums") {
+            val viewModel = viewModel<AlbumViewModel>()
+            AlbumListScreen(viewModel) }
     }
 }
 
 @Composable
 fun ScreenContent(titleSuffix: String) {
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
