@@ -30,12 +30,10 @@ class LoginTest {
     @Test
     fun userTrackerNavHost_verifyStartDestination() {
         composeTestRule.onNodeWithText("Login as User")
-        //assert(navController.currentDestination?.route == "User")
     }
 
     @Test
     fun collecionistTrackerNavHost_verifyStartDestination() {
         composeTestRule.onNodeWithText("Login as Collectionist")
-        //assert(navController.currentDestination?.route == "Collectionist")
     }
 }
