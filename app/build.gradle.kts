@@ -80,4 +80,5 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose_version")
     // Needed for createComposeRule(), but not for createAndroidComposeRule<YourActivity>():
     debugImplementation("androidx.compose.ui:ui-test-manifest:$compose_version")
+    androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
 }
