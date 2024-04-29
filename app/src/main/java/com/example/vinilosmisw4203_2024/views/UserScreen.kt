@@ -93,7 +93,6 @@ fun BottomNavigationBar(navController: NavHostController) {
 fun NavigationGraph(navController: NavHostController) {
     NavHost(navController, startDestination = "artists") {
 
-
         composable("artists") {
             val viewModelArtist = viewModel<ArtistViewModel>()
             ArtistListScreen(viewModelArtist) }
