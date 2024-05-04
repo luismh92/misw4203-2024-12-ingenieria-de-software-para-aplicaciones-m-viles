@@ -27,6 +27,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.vinilosmisw4203_2024.R
 import com.example.vinilosmisw4203_2024.viewsModels.AlbumViewModel
 import com.example.vinilosmisw4203_2024.viewsModels.ArtistViewModel
+import com.example.vinilosmisw4203_2024.viewsModels.CollectorViewModel
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -96,7 +97,9 @@ fun NavigationGraph(navController: NavHostController) {
         composable("artists") {
             val viewModelArtist = viewModel<ArtistViewModel>()
             ArtistListScreen(viewModelArtist) }
-        composable("collectors") { ScreenContent("COLECCIONISTAS") }
+        composable("collectors") {
+            val viewModelCollector = viewModel<CollectorViewModel>()
+            CollectorListScreen(viewModelCollector) }
         composable("albums") {
             val viewModel = viewModel<AlbumViewModel>()
             AlbumListScreen(viewModel) }
