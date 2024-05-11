@@ -11,17 +11,18 @@ import kotlinx.coroutines.launch
 
 class AlbumViewModel : ViewModel() {
 
-    private val respository = AlbumRepository()
+    private val repository = AlbumRepository()  // Correct the spelling mistake here
     private val _albums = MutableLiveData<List<Album>>()
-    val artists: LiveData<List<Album>> = _albums
+    val albums: LiveData<List<Album>> = _albums  // Changed from 'artists' to 'albums'
 
     fun fetchAlbums() {
         viewModelScope.launch {
             try {
-                val listAlbums = respository.getAlbums()
-                _albums.value = listAlbums
-            }catch (e: Exception){
-                Log.d("Repo", "fetch Albums exception ${e.message}")
+                val listAlbums = repository.getAlbums()  // Correct the method call to match the correct spelling of the repository instance
+                _albums.postValue(listAlbums)
+            } catch (e: Exception) {
+                Log.d("AlbumViewModel", "fetch Albums exception: ${e.message}")
+                _albums.postValue(emptyList())  // Optionally handle errors by posting an empty list
             }
         }
     }
