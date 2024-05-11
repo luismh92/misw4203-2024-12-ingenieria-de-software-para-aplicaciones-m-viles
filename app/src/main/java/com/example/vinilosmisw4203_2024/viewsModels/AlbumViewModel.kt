@@ -10,7 +10,6 @@ import com.example.vinilosmisw4203_2024.repositories.AlbumRepository
 import kotlinx.coroutines.launch
 
 class AlbumViewModel : ViewModel() {
-
     private val repository = AlbumRepository()  // Correct the spelling mistake here
     private val _albums = MutableLiveData<List<Album>>()
     val albums: LiveData<List<Album>> = _albums  // Changed from 'artists' to 'albums'
