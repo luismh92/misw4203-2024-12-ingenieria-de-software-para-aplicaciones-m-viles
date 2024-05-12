@@ -17,17 +17,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.vinilosmisw4203_2024.R
 import com.example.vinilosmisw4203_2024.viewsModels.AlbumViewModel
 import com.example.vinilosmisw4203_2024.viewsModels.ArtistViewModel
-
+import com.example.vinilosmisw4203_2024.viewsModels.CollectorViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
@@ -88,36 +88,19 @@ fun BottomNavigationBar(navController: NavHostController) {
     }
 }
 
-
 @Composable
 fun NavigationGraph(navController: NavHostController) {
     NavHost(navController, startDestination = "artists") {
-
         composable("artists") {
             val viewModelArtist = viewModel<ArtistViewModel>()
             ArtistListScreen(viewModelArtist) }
-        composable("collectors") { ScreenContent("COLECCIONISTAS") }
+        composable("collectors") {
+            val viewModelCollector = viewModel<CollectorViewModel>()
+            CollectorListScreen(viewModelCollector)
+        }
         composable("albums") {
-            val viewModel = viewModel<AlbumViewModel>()
-            AlbumListScreen(viewModel) }
+            val viewModelAlbum = viewModel<AlbumViewModel>()
+            AlbumListScreen(viewModelAlbum)
+        }
     }
 }
-
-@Composable
-fun ScreenContent(titleSuffix: String) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = "12 VINILOS - $titleSuffix",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
-    }
-}
-
