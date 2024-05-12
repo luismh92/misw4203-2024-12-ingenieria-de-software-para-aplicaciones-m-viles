@@ -7,7 +7,8 @@ data class Collector(
     val email: String,
     val comments: List<Comment>,
     val favoritePerformers: List<Performer>,
-    val collectorAlbums: List<CollectorAlbum>
+    val collectorAlbums: List<CollectorAlbum>,
+    val image: String
 )
 
 data class Comment(

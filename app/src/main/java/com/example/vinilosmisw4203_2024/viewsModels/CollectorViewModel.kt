@@ -1,24 +1,27 @@
 package com.example.vinilosmisw4203_2024.viewsModels
 
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 import com.example.vinilosmisw4203_2024.models.Collector
 import com.example.vinilosmisw4203_2024.repositories.CollectorRepository
+import kotlinx.coroutines.launch
 
-class CollectorViewModel(private val repository: CollectorRepository) : ViewModel() {
-    private val _collectors = MutableStateFlow<List<Collector>>(emptyList())
-    val collectors: StateFlow<List<Collector>> = _collectors
+class CollectorViewModel : ViewModel() {
+    private val repository = CollectorRepository()
+    private val _collectors = MutableLiveData<List<Collector>>()
+    val collectors: LiveData<List<Collector>> = _collectors
 
     fun fetchCollectors() {
         viewModelScope.launch {
             try {
-                _collectors.value = repository.getCollectors()
+                val listCollectors = repository.getCollectors()
+                _collectors.postValue(listCollectors)
             } catch (e: Exception) {
-                // Manejo de errores, podría loggear o manejar el estado de error de forma más compleja
-                _collectors.value = emptyList()
+                Log.d("CollectorViewModel", "fetch Collectors exception: ${e.message}")
+                _collectors.postValue(emptyList())  // Optionally handle errors by posting an empty list
             }
         }
     }
