@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vinilosmisw4203_2024.models.Collector
 import com.example.vinilosmisw4203_2024.repositories.CollectorRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CollectorViewModel : ViewModel() {
@@ -15,13 +16,14 @@ class CollectorViewModel : ViewModel() {
     val collectors: LiveData<List<Collector>> = _collectors
 
     fun fetchCollectors() {
-        viewModelScope.launch {
+        _collectors.value = listOf() // Pre-clear the current collector list
+        viewModelScope.launch(Dispatchers.IO) { // IMPLEMANTACION DE ANRs UTILIZANDO VIEWMODELSCOPE.LAUNCH(DISPATCHERS.IO)
             try {
                 val listCollectors = repository.getCollectors()
                 _collectors.postValue(listCollectors)
             } catch (e: Exception) {
                 Log.d("CollectorViewModel", "fetch Collectors exception: ${e.message}")
-                _collectors.postValue(emptyList())  // Optionally handle errors by posting an empty list
+                _collectors.postValue(emptyList()) // Manejo de errores postando una lista vacía
             }
         }
     }
