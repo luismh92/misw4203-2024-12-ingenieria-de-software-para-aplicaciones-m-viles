@@ -7,21 +7,31 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vinilosmisw4203_2024.models.Album
 import com.example.vinilosmisw4203_2024.repositories.AlbumRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AlbumViewModel : ViewModel() {
-    private val repository = AlbumRepository()  // Correct the spelling mistake here
+    private val repository = AlbumRepository()
     private val _albums = MutableLiveData<List<Album>>()
-    val albums: LiveData<List<Album>> = _albums  // Changed from 'artists' to 'albums'
+    val albums: LiveData<List<Album>> = _albums
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> = _error
 
     fun fetchAlbums() {
-        viewModelScope.launch {
+        _isLoading.value = true// OPERACIONES DE RED NO VAN AL HILO PRINCIPAL
+        viewModelScope.launch(Dispatchers.IO) {// IMPLEMANTACION DE ANRs UTILIZANDO VIEWMODELSCOPE.LAUNCH(DISPATCHERS.IO)
             try {
-                val listAlbums = repository.getAlbums()  // Correct the method call to match the correct spelling of the repository instance
+                val listAlbums = repository.getAlbums()
                 _albums.postValue(listAlbums)
+                _isLoading.postValue(false)
             } catch (e: Exception) {
                 Log.d("AlbumViewModel", "fetch Albums exception: ${e.message}")
-                _albums.postValue(emptyList())  // Optionally handle errors by posting an empty list
+                _error.postValue(e.message ?: "An unknown error occurred")
+                _isLoading.postValue(false)
             }
         }
     }

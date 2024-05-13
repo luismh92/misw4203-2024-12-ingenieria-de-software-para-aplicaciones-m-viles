@@ -34,7 +34,7 @@ fun ArtistListScreen(viewModel: ArtistViewModel) {
 
     LaunchedEffect(Unit) {
         try {
-            viewModel.fetchArtist()
+            viewModel.fetchArtists()
             loading.value = false
         } catch (e: Exception) {
             error.value = e.message ?: "Unknown error"
