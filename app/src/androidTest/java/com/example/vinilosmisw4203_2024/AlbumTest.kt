@@ -17,5 +17,6 @@ class AlbumTest {
             AlbumListScreen(viewModel = viewModelAlbum)
         }
         composeTestRule.onNodeWithText("albums")
+        composeTestRule.onNodeWithText("Poeta del pueblo")
     }
 }
