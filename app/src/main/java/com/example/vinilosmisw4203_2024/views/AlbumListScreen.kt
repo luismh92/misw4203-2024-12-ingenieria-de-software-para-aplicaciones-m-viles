@@ -1,19 +1,28 @@
 package com.example.vinilosmisw4203_2024.views
 
+import android.graphics.Paint.Align
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LargeFloatingActionButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -62,18 +71,42 @@ fun AlbumListScreen(viewModel: AlbumViewModel) {
 
 @Composable
 fun AlbumList(albums: List<Album>, onAlbumClick: (Album) -> Unit) {
+
+
     Column {
+//        Row (modifier = Modifier.align(Alignment.End)){
+//            Text(
+//                text = "12 VINILOS",
+//                modifier = Modifier
+//                    .padding(8.dp),
+//                fontSize = 30.sp
+//            )
+//            SmallFloatingActionButton(
+//                onClick = { onClick() },
+//                shape = CircleShape,
+//                containerColor = Color.Gray,
+//                contentColor = Color.White,
+//                modifier = Modifier.padding(start = 30.dp, end = 20.dp)
+//                ) {
+//                Icon(Icons.Filled.Add, "Create Album")
+//            }
+//        }
+
         Text(
             text = "12 VINILOS",
-            modifier = Modifier.padding(8.dp).align(Alignment.CenterHorizontally),
+            modifier = Modifier
+                .padding(8.dp).align(Alignment.CenterHorizontally),
             fontSize = 30.sp
         )
         LazyColumn {
             items(albums) { album ->
                 AlbumItem(album, onAlbumClick)
             }
-        }
-    }
+        }}
+}
+
+fun onClick() {
+    TODO("Not yet implemented")
 }
 
 @Composable
