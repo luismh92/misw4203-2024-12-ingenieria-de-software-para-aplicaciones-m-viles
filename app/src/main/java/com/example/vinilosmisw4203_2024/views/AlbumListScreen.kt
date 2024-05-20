@@ -74,8 +74,7 @@ fun AlbumList(albums: List<Album>, onAlbumClick: (Album) -> Unit) {
     Column {
         Text(
             text = "12 VINILOS",
-            modifier = Modifier
-                .padding(8.dp).align(Alignment.CenterHorizontally),
+            modifier = Modifier.padding(8.dp).align(Alignment.CenterHorizontally),
             fontSize = 30.sp
         )
         LazyColumn {
@@ -83,10 +82,6 @@ fun AlbumList(albums: List<Album>, onAlbumClick: (Album) -> Unit) {
                 AlbumItem(album, onAlbumClick)
             }
         }}
-}
-
-fun onClick() {
-    TODO("Not yet implemented")
 }
 
 @Composable
