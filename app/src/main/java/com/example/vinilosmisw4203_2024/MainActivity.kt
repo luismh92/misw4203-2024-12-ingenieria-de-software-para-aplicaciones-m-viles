@@ -13,6 +13,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.vinilosmisw4203_2024.ui.theme.VinilosMisw42032024Theme
 import com.example.vinilosmisw4203_2024.views.CollectorListScreen
+import com.example.vinilosmisw4203_2024.views.CollectorScreen
 import com.example.vinilosmisw4203_2024.views.UserScreen
 import com.example.vinilosmisw4203_2024.views.LoginScreen
 import com.example.vinilosmisw4203_2024.viewsModels.CollectorViewModel
@@ -31,10 +32,8 @@ class MainActivity : ComponentActivity() {
                     NavHost(navController = navController, startDestination = "welcome") {
                         composable("welcome") { LoginScreen(navController) }
                         composable("User") { UserScreen() }
-                        composable("Collectionist") {
-                            // Here we create a CollectorViewModel instance
-                            val collectorViewModel: CollectorViewModel = viewModel()
-                            CollectorListScreen(collectorViewModel)
+                        composable("collectionist") {
+                            CollectorScreen()
                         }
                     }
                 }
