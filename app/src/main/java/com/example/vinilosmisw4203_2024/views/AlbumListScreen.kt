@@ -71,27 +71,7 @@ fun AlbumListScreen(viewModel: AlbumViewModel) {
 
 @Composable
 fun AlbumList(albums: List<Album>, onAlbumClick: (Album) -> Unit) {
-
-
     Column {
-//        Row (modifier = Modifier.align(Alignment.End)){
-//            Text(
-//                text = "12 VINILOS",
-//                modifier = Modifier
-//                    .padding(8.dp),
-//                fontSize = 30.sp
-//            )
-//            SmallFloatingActionButton(
-//                onClick = { onClick() },
-//                shape = CircleShape,
-//                containerColor = Color.Gray,
-//                contentColor = Color.White,
-//                modifier = Modifier.padding(start = 30.dp, end = 20.dp)
-//                ) {
-//                Icon(Icons.Filled.Add, "Create Album")
-//            }
-//        }
-
         Text(
             text = "12 VINILOS",
             modifier = Modifier
