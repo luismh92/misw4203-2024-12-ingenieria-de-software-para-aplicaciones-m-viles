@@ -36,10 +36,14 @@ class AlbumViewModel : ViewModel() {
         }
     }
 
-    fun createAlbum(album: Album, onSuccess: () -> Unit) {
+    fun createAlbum(album: Album, onSuccess: () -> Unit, onError: (String) -> Unit) {
         viewModelScope.launch {
-            repository.createAlbum(album)
-            onSuccess()
+            try {
+                repository.createAlbum(album)
+                onSuccess()  // Llama a la función de éxito
+            } catch (e: Exception) {
+                onError(e.message ?: "Error desconocido")  // Llama a la función de error
+            }
         }
     }
 }

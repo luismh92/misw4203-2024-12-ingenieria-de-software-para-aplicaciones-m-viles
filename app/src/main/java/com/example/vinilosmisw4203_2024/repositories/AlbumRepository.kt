@@ -1,4 +1,5 @@
 package com.example.vinilosmisw4203_2024.repositories
+import android.util.Log
 import com.example.vinilosmisw4203_2024.models.Album
 import com.example.vinilosmisw4203_2024.services.RetrofitInstance
 import android.util.LruCache
@@ -20,6 +21,9 @@ class AlbumRepository {
     }
 
     suspend fun createAlbum(album: Album): Album {
-        return albumService.createAlbum(album)
+        Log.d("AlbumRepository", "Sending album data to server: $album")
+        return albumService.createAlbum(album).also {
+            Log.d("AlbumRepository", "Album created successfully: $it")
+        }
     }
 }
