@@ -13,7 +13,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.vinilosmisw4203_2024.models.Album
 import com.example.vinilosmisw4203_2024.viewsModels.AlbumViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AlbumCreateScreen() {
     val viewModel: AlbumViewModel = viewModel()
@@ -23,25 +22,71 @@ fun AlbumCreateScreen() {
     var releaseDate by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
     var genre by remember { mutableStateOf("") }
-    var recordLabel by remember { mutableStateOf("") }
+    val recordLabel = "Sony Music"
 
-    Button(
-        onClick = {
-            viewModel.createAlbum(
-                Album(
-                    name = name,
-                    cover = cover,
-                    releaseDate = releaseDate,
-                    description = description,
-                    genre = genre,
-                    recordLabel = recordLabel
-                )
-            ) {
-                Toast.makeText(context, "Album creado", Toast.LENGTH_SHORT).show()
-            }
-        },
-        modifier = Modifier.padding(top = 16.dp)
-    ) {
-        Text("Create Album")
+    Column(modifier = Modifier.padding(16.dp)) {
+        OutlinedTextField(
+            value = name,
+            onValueChange = { name = it },
+            label = { Text("Album Name") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(
+            value = cover,
+            onValueChange = { cover = it },
+            label = { Text("Cover URL") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(
+            value = releaseDate,
+            onValueChange = { releaseDate = it },
+            label = { Text("Release Date") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(
+            value = description,
+            onValueChange = { description = it },
+            label = { Text("Description") },
+            modifier = Modifier.fillMaxWidth()
+        )
+        OutlinedTextField(
+            value = genre,
+            onValueChange = { genre = it },
+            label = { Text("Genre") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Button(
+            onClick = {
+                if (name.isBlank() || cover.isBlank() || releaseDate.isBlank() || description.isBlank() || genre.isBlank()) {
+                    Toast.makeText(context, "Please fill in all fields.", Toast.LENGTH_SHORT).show()
+                } else {
+                    viewModel.createAlbum(
+                        Album(
+                            name = name,
+                            cover = cover,
+                            releaseDate = releaseDate,
+                            description = description,
+                            genre = genre,
+                            recordLabel = recordLabel
+                        ),
+                        onSuccess = {
+                            Toast.makeText(context, "Album creado", Toast.LENGTH_SHORT).show()
+                            name = ""
+                            cover = ""
+                            releaseDate = ""
+                            description = ""
+                            genre = ""
+                        },
+                        onError = { errorMsg ->
+                            Toast.makeText(context, "Failed to create album: $errorMsg", Toast.LENGTH_LONG).show()
+                        }
+                    )
+                }
+            },
+            modifier = Modifier.padding(top = 16.dp)
+        ) {
+            Text("Create Album")
+        }
     }
 }
