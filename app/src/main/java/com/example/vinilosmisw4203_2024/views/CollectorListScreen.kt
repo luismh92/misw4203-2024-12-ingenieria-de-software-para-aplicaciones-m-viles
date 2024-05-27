@@ -2,6 +2,7 @@ package com.example.vinilosmisw4203_2024.views
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -16,6 +17,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -64,11 +66,13 @@ fun CollectorListScreen(viewModel: CollectorViewModel) {
 
 @Composable
 fun CollectorList(collectors: List<Collector>, onCollectorClick: (Collector) -> Unit) {
+    val isDark = isSystemInDarkTheme()
     Column {
         Text(
             text = "Coleccionistas",
             modifier = Modifier.padding(8.dp).align(Alignment.CenterHorizontally),
-            fontSize = 30.sp
+            fontSize = 30.sp,
+            color = if (isDark) Color.White else Color.Black
         )
         LazyColumn {
             items(collectors) { collector ->
@@ -112,10 +116,12 @@ fun CollectorItem(collector: Collector, onCollectorClick: (Collector) -> Unit) {
 
 @Composable
 fun CollectorDetailDialog(collector: Collector, onDismissRequest: () -> Unit) {
+    val isDark = isSystemInDarkTheme()
+    val color = if (isDark) Color.White else Color.Black
     AlertDialog(
         onDismissRequest = { onDismissRequest() },
         title = {
-            Text(text = collector.name)
+            Text(text = collector.name, color= color)
         },
         text = {
             Column(modifier = Modifier.fillMaxWidth()) {
@@ -127,14 +133,14 @@ fun CollectorDetailDialog(collector: Collector, onDismissRequest: () -> Unit) {
                         .fillMaxWidth(),
                     contentScale = ContentScale.Crop
                 )
-                Text("Teléfono: ${collector.telephone}")
-                Text("Correo: ${collector.email}")
+                Text("Teléfono: ${collector.telephone}", color= color)
+                Text("Correo: ${collector.email}", color=color)
                 // Agrega más detalles según sea necesario
             }
         },
         confirmButton = {
             Button(onClick = { onDismissRequest() }) {
-                Text("Cerrar")
+                Text("Cerrar", color=color)
             }
         }
     )

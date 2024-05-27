@@ -1,6 +1,7 @@
 package com.example.vinilosmisw4203_2024.views
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -11,6 +12,7 @@ import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material3.ColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
@@ -27,6 +29,7 @@ import com.example.vinilosmisw4203_2024.viewsModels.ArtistViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Color
 import com.example.vinilosmisw4203_2024.models.Album
 import com.example.vinilosmisw4203_2024.models.Collector
 
@@ -73,12 +76,16 @@ fun ArtistListScreen(viewModel: ArtistViewModel) {
 //fun CollectorList(collectors: List<Collector>, onCollectorClick: (Collector) -> Unit) {
 @Composable
 fun ArtistList(artists: List<Artist>, onCollectorClick: (Artist) -> Unit) {
+
+    val isDark = isSystemInDarkTheme()
     Column {
         Text(text = "12 VINILOS",
             modifier = Modifier
                 .padding(8.dp)
                 .align(Alignment.CenterHorizontally),
-            fontWeight = FontWeight.Bold, fontSize = 30.sp)
+            fontWeight = FontWeight.Bold, fontSize = 30.sp,
+            color = if (isDark) Color.White else Color.Black
+            )
         LazyColumn {
             items(artists) { artist ->
                 ArtistItem(artist, onCollectorClick)

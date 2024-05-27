@@ -3,6 +3,7 @@ package com.example.vinilosmisw4203_2024.views
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -15,6 +16,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -63,11 +65,14 @@ fun AlbumListScreen(viewModel: AlbumViewModel) {
 
 @Composable
 fun AlbumList(albums: List<Album>, onAlbumClick: (Album) -> Unit) {
+
+    val isDark = isSystemInDarkTheme()
     Column {
         Text(
             text = "12 VINILOS",
             modifier = Modifier.padding(8.dp).align(Alignment.CenterHorizontally),
-            fontSize = 30.sp
+            fontSize = 30.sp,
+            color = if (isDark) Color.White else Color.Black
         )
         LazyColumn {
             items(albums) { album ->
@@ -102,10 +107,13 @@ fun AlbumItem(album: Album, onAlbumClick: (Album) -> Unit) {
 
 @Composable
 fun AlbumDetailDialog(album: Album, onDismissRequest: () -> Unit) {
+    val isDark = isSystemInDarkTheme()
+    val color = if (isDark) Color.White else Color.Black
+
     AlertDialog(
         onDismissRequest = { onDismissRequest() },
         title = {
-            Text(text = album.name)
+            Text(text = album.name, color=color)
         },
         text = {
             Column(modifier = Modifier.fillMaxWidth()) {
@@ -117,15 +125,15 @@ fun AlbumDetailDialog(album: Album, onDismissRequest: () -> Unit) {
                         .fillMaxWidth(),
                     contentScale = ContentScale.Crop
                 )
-                Text("Género: ${album.genre}")
-                Text("Fecha de lanzamiento: ${album.releaseDate}")
-                Text("Descripción: ${album.description}")
-                Text("Sello discográfico: ${album.recordLabel}")
+                Text("Género: ${album.genre}", color=color)
+                Text("Fecha de lanzamiento: ${album.releaseDate}", color=color)
+                Text("Descripción: ${album.description}", color=color)
+                Text("Sello discográfico: ${album.recordLabel}", color=color)
             }
         },
         confirmButton = {
             Button(onClick = { onDismissRequest() }) {
-                Text("Cerrar")
+                Text("Cerrar", color=color)
             }
         }
     )
