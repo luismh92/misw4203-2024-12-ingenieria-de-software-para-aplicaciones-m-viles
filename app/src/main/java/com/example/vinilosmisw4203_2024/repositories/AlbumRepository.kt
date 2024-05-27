@@ -18,4 +18,8 @@ class AlbumRepository {
         albumCache.put("albums", albums)
         return albums
     }
+
+    suspend fun createAlbum(album: Album): Album {
+        return albumService.createAlbum(album)
+    }
 }
