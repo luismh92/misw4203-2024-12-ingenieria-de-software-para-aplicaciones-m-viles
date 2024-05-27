@@ -35,4 +35,11 @@ class AlbumViewModel : ViewModel() {
             }
         }
     }
+
+    fun createAlbum(album: Album, onSuccess: () -> Unit) {
+        viewModelScope.launch {
+            repository.createAlbum(album)
+            onSuccess()
+        }
+    }
 }
