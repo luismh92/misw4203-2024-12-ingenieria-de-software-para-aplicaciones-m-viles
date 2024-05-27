@@ -1,5 +1,6 @@
 package com.example.vinilosmisw4203_2024.views
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -25,9 +26,16 @@ import com.example.vinilosmisw4203_2024.models.Artist
 import com.example.vinilosmisw4203_2024.viewsModels.ArtistViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.setValue
+import com.example.vinilosmisw4203_2024.models.Album
+import com.example.vinilosmisw4203_2024.models.Collector
 
 @Composable
 fun ArtistListScreen(viewModel: ArtistViewModel) {
+
+    var showDetailDialog by remember { mutableStateOf(false) }
+    var selectedArtist by remember { mutableStateOf<Artist?>(null) }
+
     val loading = remember { mutableStateOf(true) }
     val error = remember { mutableStateOf("") }
     val artists by viewModel.artists.observeAsState()
@@ -47,27 +55,42 @@ fun ArtistListScreen(viewModel: ArtistViewModel) {
     } else if (error.value.isNotEmpty()) {
         Text("Error: ${error.value}")
     } else {
-        artists?.let { ArtistList(it) }
+        artists?.let {
+            ArtistList(it){artist->
+                selectedArtist = artist
+                showDetailDialog = true
+            }
+        }
+    }
+
+    selectedArtist?.let {
+        if (showDetailDialog) {
+            ArtistDetailScreen(artist = it, onDismissRequest = { showDetailDialog = false })
+        }
     }
 }
 
+//fun CollectorList(collectors: List<Collector>, onCollectorClick: (Collector) -> Unit) {
 @Composable
-fun ArtistList(items: List<Artist>) {
+fun ArtistList(artists: List<Artist>, onCollectorClick: (Artist) -> Unit) {
     Column {
         Text(text = "12 VINILOS",
-            modifier = Modifier.padding(8.dp).align(Alignment.CenterHorizontally),
+            modifier = Modifier
+                .padding(8.dp)
+                .align(Alignment.CenterHorizontally),
             fontWeight = FontWeight.Bold, fontSize = 30.sp)
         LazyColumn {
-            items(items) { artist ->
-                ArtistItem(artist)
+            items(artists) { artist ->
+                ArtistItem(artist, onCollectorClick)
             }
         }
     }
 }
 
+
 @Composable
-fun ArtistItem(artist: Artist) {
-    Card(modifier = Modifier.padding(8.dp)) {
+fun ArtistItem(artist: Artist, onCollectorClick: (Artist) -> Unit) {
+    Card(modifier = Modifier.padding(8.dp).clickable { onCollectorClick(artist) },) {
         Column(modifier = Modifier.padding(16.dp)) {
             Image(
                 painter = rememberImagePainter(
