@@ -30,7 +30,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.luminance
 import com.example.vinilosmisw4203_2024.models.Album
 import com.example.vinilosmisw4203_2024.models.Collector
 
@@ -77,6 +76,7 @@ fun ArtistListScreen(viewModel: ArtistViewModel) {
 //fun CollectorList(collectors: List<Collector>, onCollectorClick: (Collector) -> Unit) {
 @Composable
 fun ArtistList(artists: List<Artist>, onCollectorClick: (Artist) -> Unit) {
+
     val isDark = isSystemInDarkTheme()
     Column {
         Text(text = "12 VINILOS",

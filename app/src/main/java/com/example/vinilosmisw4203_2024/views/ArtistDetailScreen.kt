@@ -1,7 +1,10 @@
 package com.example.vinilosmisw4203_2024.views
 
 import androidx.compose.foundation.Image
+<<<<<<< HEAD
 import androidx.compose.foundation.isSystemInDarkTheme
+=======
+>>>>>>> a4c5ad9917c9fdebd07d99409e1934b324a4c584
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,7 +17,10 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+<<<<<<< HEAD
 import androidx.compose.ui.graphics.Color
+=======
+>>>>>>> a4c5ad9917c9fdebd07d99409e1934b324a4c584
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
